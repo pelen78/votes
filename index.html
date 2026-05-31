@@ -1,0 +1,282 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body,div,span,p,label,button,input,a{font-family:'Nunito',sans-serif}
+.wrap{padding:2rem 1.25rem}
+h1{font-size:26px;font-weight:800;color:#C41E3A;margin-bottom:6px}
+.sub{font-size:15px;color:var(--color-text-secondary);margin-bottom:1.75rem;line-height:1.5}
+.field{margin-bottom:14px}
+.field label{font-size:13px;font-weight:700;color:#1A3A6B;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+.field input{width:100%;padding:10px 14px;font-size:15px;font-family:'Nunito',sans-serif;border:1.5px solid #C8D4E8;border-radius:10px;background:var(--color-background-primary);color:var(--color-text-primary);outline:none;transition:border-color 0.15s}
+.field input:focus{border-color:#1A3A6B;box-shadow:0 0 0 3px rgba(26,58,107,0.12)}
+.btn-main{padding:11px 28px;background:#C41E3A;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:background 0.15s}
+.btn-main:hover{background:#A01830}
+.btn-main:disabled{opacity:0.35;cursor:not-allowed}
+.btn-outline{padding:11px 22px;background:transparent;color:#1A3A6B;border:1.5px solid #1A3A6B;border-radius:10px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;cursor:pointer;transition:background 0.15s}
+.btn-outline:hover{background:#EEF2F9}
+.err{font-size:13px;color:#C41E3A;font-weight:600;margin-top:8px;display:none}
+.card{background:var(--color-background-primary);border:1.5px solid #C8D4E8;border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;transition:border-color 0.15s}
+.card:hover{border-color:#1A3A6B}
+.card.selected{border:2.5px solid #C41E3A;background:#FFF5F6}
+.card-title{font-size:16px;font-weight:700;color:var(--color-text-primary);flex:1;line-height:1.3}
+.card.selected .card-title{color:#8B1528}
+.card-actions{display:flex;gap:10px;align-items:center}
+.btn-watch{font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;color:#1A3A6B;text-decoration:none;display:inline-flex;align-items:center;gap:4px;padding:7px 14px;border:1.5px solid #1A3A6B;border-radius:8px;transition:background 0.12s}
+.btn-watch:hover{background:#EEF2F9}
+.btn-vote{font-size:13px;font-weight:800;font-family:'Nunito',sans-serif;padding:7px 18px;border-radius:8px;border:1.5px solid #C41E3A;color:#C41E3A;cursor:pointer;background:transparent;transition:background 0.12s,color 0.12s;white-space:nowrap}
+.btn-vote:hover{background:#FFF5F6}
+.btn-vote.active{background:#C41E3A;color:#fff}
+.submit-row{display:flex;align-items:center;justify-content:space-between;margin-top:1.25rem;padding-top:1.25rem;border-top:1.5px solid #E8EDF5;gap:12px;flex-wrap:wrap}
+.hint{font-size:14px;color:var(--color-text-secondary);font-weight:600}
+.hint span{font-weight:800;color:#C41E3A}
+.done{text-align:center;padding:2.5rem 1.25rem}
+.done h2{font-size:24px;font-weight:800;color:#C41E3A;margin-bottom:8px}
+.done p{font-size:15px;color:var(--color-text-secondary);line-height:1.5}
+.divider{height:2px;background:linear-gradient(90deg,#C41E3A,#1A3A6B);border-radius:2px;margin-bottom:1.75rem}
+.teacher-btn-row{text-align:center;padding:0.5rem 1.25rem 1.5rem;border-top:0.5px solid #E8EDF5;margin-top:0.5rem}
+.teacher-link{font-size:12px;color:var(--color-text-tertiary);cursor:pointer;background:none;border:none;font-family:'Nunito',sans-serif;text-decoration:underline}
+.teacher-link:hover{color:#1A3A6B}
+.teacher-panel{padding:2rem 1.25rem}
+.teacher-panel h2{font-size:22px;font-weight:800;color:#1A3A6B;margin-bottom:6px}
+.medals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem}
+.medal-card{border-radius:14px;padding:1.1rem 1.25rem;border:1.5px solid}
+.medal-1{background:#FFF5F6;border-color:#C41E3A}
+.medal-2{background:#EEF2F9;border-color:#1A3A6B}
+.medal-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.medal-1 .medal-label{color:#C41E3A}
+.medal-2 .medal-label{color:#1A3A6B}
+.medal-title{font-size:15px;font-weight:800;color:var(--color-text-primary);margin-bottom:2px}
+.medal-votes{font-size:13px;font-weight:600;color:var(--color-text-secondary)}
+.all-results h3{font-size:14px;font-weight:800;color:#1A3A6B;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.rrow{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.rname{min-width:170px;color:var(--color-text-primary);font-size:13px;font-weight:600}
+.rbar-wrap{flex:1;height:6px;background:#EEF2F9;border-radius:4px;overflow:hidden}
+.rbar{height:100%;border-radius:4px;background:#C41E3A;transition:width 0.4s}
+.rcount{min-width:24px;text-align:right;font-weight:800;color:#1A3A6B;font-size:13px}
+.voter-list{margin-top:1.5rem}
+.voter-list h3{font-size:14px;font-weight:800;color:#1A3A6B;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px}
+.voter-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:0.5px solid #E8EDF5;gap:12px}
+.voter-name{font-weight:700;color:var(--color-text-primary)}
+.voter-pick{color:var(--color-text-secondary)}
+.no-votes{font-size:14px;color:var(--color-text-tertiary);text-align:center;padding:2rem 0}
+.back-btn{margin-top:1.5rem}
+</style>
+
+<div id="step-info" class="wrap">
+  <h1>Documentary Vote</h1>
+  <div class="divider"></div>
+  <p class="sub">Watch the documentaries and vote for your favorite. You can only vote once.</p>
+  <div class="field"><label>Your name</label><input id="inp-name" type="text" placeholder="Full name" /></div>
+  <div class="field"><label>School email</label><input id="inp-email" type="email" placeholder="you@school.edu" /></div>
+  <div class="err" id="err-info">Please enter your name and a valid school email.</div>
+  <button class="btn-main" onclick="goVote()" style="margin-top:6px">Continue</button>
+</div>
+<div class="teacher-btn-row">
+  <button class="teacher-link" onclick="showTeacherLogin()">Teacher view</button>
+</div>
+
+<div id="step-teacher-login" class="wrap" style="display:none">
+  <h1>Teacher view</h1>
+  <div class="divider"></div>
+  <div class="field"><label>Password</label><input id="inp-pass" type="password" placeholder="Enter password" /></div>
+  <div class="err" id="err-pass">Incorrect password.</div>
+  <div style="display:flex;gap:10px;margin-top:6px">
+    <button class="btn-main" onclick="checkPass()">Enter</button>
+    <button class="btn-outline" onclick="backToHome()">Back</button>
+  </div>
+</div>
+
+<div id="step-vote" class="wrap" style="display:none">
+  <h1>Documentary Vote</h1>
+  <div class="divider"></div>
+  <p class="sub">Watch each documentary and click <strong style="color:#C41E3A">Vote</strong> for your favorite one.</p>
+  <div id="cards"></div>
+  <div class="submit-row">
+    <div class="hint" id="hint">Select your favorite documentary</div>
+    <button class="btn-main" id="btn-submit" disabled onclick="submitVote()">Submit vote</button>
+  </div>
+</div>
+
+<div id="step-done" class="wrap done" style="display:none">
+  <h2>Vote submitted!</h2>
+  <p id="done-msg"></p>
+</div>
+
+<div id="step-teacher" class="teacher-panel" style="display:none">
+  <h2>Teacher view</h2>
+  <div class="divider"></div>
+  <div id="teacher-content"></div>
+  <div class="back-btn"><button class="btn-outline" onclick="backToHome()">Back</button></div>
+</div>
+
+<script>
+const docs=[
+  {id:1,title:"The moon landing",url:"https://www.youtube.com/watch?v=G4oKurXfplU"},
+  {id:2,title:"Rorry",url:"https://www.youtube.com/watch?v=Iz5Gp2QcgyU"},
+  {id:3,title:"The hidden struggles in student mental health",url:"https://www.youtube.com/watch?v=B7O71mAcm88"},
+  {id:4,title:"Taylor Swift",url:"https://www.youtube.com/watch?v=7w2rARJU7kc"},
+  {id:5,title:"Believe that",url:"https://www.youtube.com/watch?v=Pj9mBJbmHuU"},
+  {id:6,title:"The pressure of being a teen today",url:"https://www.youtube.com/watch?v=_IOsmK5FYeA"},
+  {id:7,title:"What if it's not in my head",url:"https://www.youtube.com/watch?v=7ulyovQGIJ8"},
+  {id:8,title:"Friendship: now vs then",url:"https://www.youtube.com/watch?v=nX4UM-YKY8c"},
+  {id:9,title:"The evolution and rise of AI in our lives",url:"https://www.youtube.com/watch?v=BKUbpA7bobY"},
+  {id:10,title:"The rise of AI",url:"https://www.youtube.com/watch?v=WoQwuObgwfQ"},
+];
+const PASS='66Shrimp78';
+// PASTE the Web App URL you get from Google Apps Script between the quotes below:
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbxcky0Mx2wTZjtL304qarCOSTusTgz3Hv2YVMxE4i_k4mwIqgW6_rDIlgDgVHoFBcQkdA/exec';
+let selected=null;
+let allVotes=[];
+
+function hideAll(){
+  ['step-info','step-teacher-login','step-vote','step-done','step-teacher'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.querySelector('.teacher-btn-row').style.display='none';
+}
+
+function backToHome(){
+  hideAll();
+  document.getElementById('step-info').style.display='block';
+  document.querySelector('.teacher-btn-row').style.display='block';
+  document.getElementById('inp-pass').value='';
+  document.getElementById('err-pass').style.display='none';
+}
+
+function showTeacherLogin(){
+  hideAll();
+  document.getElementById('step-teacher-login').style.display='block';
+  setTimeout(()=>document.getElementById('inp-pass').focus(),100);
+}
+
+function checkPass(){
+  const val=document.getElementById('inp-pass').value;
+  if(val===PASS){showTeacherPanel();}
+  else{document.getElementById('err-pass').style.display='block';}
+}
+
+function showTeacherPanel(){
+  hideAll();
+  document.getElementById('step-teacher').style.display='block';
+  renderTeacher();
+}
+
+async function renderTeacher(){
+  document.getElementById('teacher-content').innerHTML='<p style="color:var(--color-text-secondary);font-weight:600">Loading results…</p>';
+  if(SCRIPT_URL.indexOf('PASTE')>-1){document.getElementById('teacher-content').innerHTML='<p style="color:#C41E3A;font-weight:700">Setup needed: paste your Apps Script URL into SCRIPT_URL in the HTML.</p>';return;}
+  try{
+    const res=await fetch(SCRIPT_URL);
+    const data=await res.json();
+    allVotes=data.votes||[];
+  }catch(e){
+    document.getElementById('teacher-content').innerHTML='<p style="color:#C41E3A;font-weight:700">Could not load results. Check your internet connection and the Apps Script URL.</p>';
+    return;
+  }
+  const counts={};
+  docs.forEach(d=>counts[d.id]={title:d.title,votes:0});
+  allVotes.forEach(v=>counts[v.vote].votes++);
+  const sorted=Object.values(counts).sort((a,b)=>b.votes-a.votes);
+  const total=allVotes.length;
+  const max=sorted[0].votes||1;
+  const first=sorted[0];
+  const second=sorted[1];
+
+  let html=`<p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1.25rem;font-weight:600">Total votes: <strong style="color:#1A3A6B">${total}</strong></p>`;
+
+  if(total>0){
+    html+=`<div class="medals">
+      <div class="medal-card medal-1"><div class="medal-label">1st place</div><div class="medal-title">${first.title}</div><div class="medal-votes">${first.votes} vote${first.votes!==1?'s':''}</div></div>
+      <div class="medal-card medal-2"><div class="medal-label">2nd place</div><div class="medal-title">${second.title}</div><div class="medal-votes">${second.votes} vote${second.votes!==1?'s':''}</div></div>
+    </div>`;
+  }
+
+  html+=`<div class="all-results"><h3>All results</h3>`;
+  html+=sorted.map(d=>`
+    <div class="rrow">
+      <span class="rname">${d.title}</span>
+      <div class="rbar-wrap"><div class="rbar" style="width:${total?Math.round(d.votes/max*100):0}%"></div></div>
+      <span class="rcount">${d.votes}</span>
+    </div>`).join('');
+  html+=`</div>`;
+
+  if(allVotes.length>0){
+    html+=`<div class="voter-list"><h3>Who voted</h3>`;
+    html+=allVotes.map(v=>{
+      const pick=docs.find(d=>d.id===v.vote);
+      return `<div class="voter-row"><span class="voter-name">${v.name}</span><span style="font-size:11px;color:var(--color-text-tertiary)">${v.email}</span><span class="voter-pick">${pick?pick.title:''}</span></div>`;
+    }).join('');
+    html+=`</div>`;
+  } else {
+    html+=`<div class="no-votes">No votes yet.</div>`;
+  }
+
+  document.getElementById('teacher-content').innerHTML=html;
+}
+
+function goVote(){
+  const name=document.getElementById('inp-name').value.trim();
+  const email=document.getElementById('inp-email').value.trim().toLowerCase();
+  const err=document.getElementById('err-info');
+  if(!name||!email.includes('@')||!email.includes('.')){err.style.display='block';return;}
+  err.style.display='none';
+  hideAll();
+  document.getElementById('step-vote').style.display='block';
+  renderCards();
+}
+
+function renderCards(){
+  document.getElementById('cards').innerHTML=docs.map(d=>`
+    <div class="card" id="card-${d.id}">
+      <div class="card-title">${d.title}</div>
+      <div class="card-actions">
+        <a class="btn-watch" href="${d.url}" target="_blank"><i class="ti ti-player-play" style="font-size:14px" aria-hidden="true"></i> Watch</a>
+        <button class="btn-vote" id="vbtn-${d.id}" onclick="pick(${d.id})">Vote</button>
+      </div>
+    </div>`).join('');
+}
+
+function pick(id){
+  selected=id;
+  docs.forEach(d=>{
+    document.getElementById('card-'+d.id).className=d.id===id?'card selected':'card';
+    const btn=document.getElementById('vbtn-'+d.id);
+    btn.className=d.id===id?'btn-vote active':'btn-vote';
+    btn.textContent=d.id===id?'Voted':'Vote';
+  });
+  const title=docs.find(d=>d.id===id).title;
+  document.getElementById('hint').innerHTML=`Your vote: <span>${title}</span>`;
+  document.getElementById('btn-submit').disabled=false;
+}
+
+async function submitVote(){
+  if(!selected)return;
+  if(SCRIPT_URL.indexOf('PASTE')>-1){alert('Setup needed: paste your Apps Script URL into SCRIPT_URL in the HTML.');return;}
+  const name=document.getElementById('inp-name').value.trim();
+  const email=document.getElementById('inp-email').value.trim().toLowerCase();
+  const btn=document.getElementById('btn-submit');
+  btn.disabled=true;btn.textContent='Submitting…';
+  try{
+    const res=await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({name,email,vote:selected})});
+    const data=await res.json();
+    if(data.status==='duplicate'){
+      document.getElementById('hint').innerHTML='<span>This email has already voted.</span>';
+      btn.disabled=false;btn.textContent='Submit vote';
+      return;
+    }
+  }catch(e){
+    alert('There was a problem submitting your vote. Please check your internet connection and try again.');
+    btn.disabled=false;btn.textContent='Submit vote';
+    return;
+  }
+  const title=docs.find(d=>d.id===selected).title;
+  hideAll();
+  document.getElementById('step-done').style.display='block';
+  document.getElementById('done-msg').textContent=`Thanks ${name}! You voted for "${title}".`;
+}
+
+document.getElementById('inp-name').addEventListener('input',()=>document.getElementById('err-info').style.display='none');
+document.getElementById('inp-email').addEventListener('input',()=>document.getElementById('err-info').style.display='none');
+document.getElementById('inp-email').addEventListener('keydown',e=>{if(e.key==='Enter')goVote()});
+document.getElementById('inp-pass').addEventListener('keydown',e=>{if(e.key==='Enter')checkPass()});
+</script>
